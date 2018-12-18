@@ -278,6 +278,13 @@ TEST_F(SdbusTestObject, FailsCallingMethodOnNonexistentObject)
     ASSERT_THROW(proxy.getInt(), sdbus::Error);
 }
 
+
+TEST_F(SdbusTestObject, CallsMethodThatThrowsSuccessfully)
+{
+    ASSERT_THROW(m_proxy->throwException(), sdbus::Error);
+}
+
+
 // Signals
 
 TEST_F(SdbusTestObject, EmitsSimpleSignalSuccesfully)

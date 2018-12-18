@@ -160,6 +160,10 @@ protected:
     bool blocking() { return m_blocking; }
     void blocking(const bool& value) { m_blocking = value; }
 
+    // TODO: This works! void throwException() { throw sdbus::createError(1, "Note"); }
+    // Following (direct throw) does not work
+    void throwException() { throw sdbus::Error("Name", "Message"); }
+
 private:
     uint32_t m_action;
     bool m_blocking;

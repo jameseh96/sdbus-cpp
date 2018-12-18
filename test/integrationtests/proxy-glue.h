@@ -194,6 +194,11 @@ public:
         object_.setProperty("blocking").onInterface(INTERFACE_NAME).toValue(value);
     }
 
+    void throwException()
+    {
+        object_.callMethod("throwException").onInterface(INTERFACE_NAME);
+    }
+
 
 private:
     sdbus::IObjectProxy& object_;

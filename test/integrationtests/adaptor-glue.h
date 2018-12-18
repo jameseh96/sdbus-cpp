@@ -106,6 +106,7 @@ protected:
         object_.registerProperty("action").onInterface(INTERFACE_NAME).withGetter([this](){ return this->action(); }).withSetter([this](const uint32_t& value){ this->action(value); });
         object_.registerProperty("blocking").onInterface(INTERFACE_NAME)./*withGetter([this](){ return this->blocking(); }).*/withSetter([this](const bool& value){ this->blocking(value); });
 
+        object_.registerMethod("throwException").onInterface(INTERFACE_NAME).implementedAs([this](){ return this->throwException(); });
     }
 
 public:
@@ -161,6 +162,7 @@ protected:
     virtual bool blocking() = 0;
     virtual void blocking(const bool& value) = 0;
 
+    virtual void throwException() = 0;
 };
 
 

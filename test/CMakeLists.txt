@@ -66,8 +66,8 @@ set(CMAKE_NO_SYSTEM_FROM_IMPORTED "1")
 add_executable(libsdbus-c++_unittests ${UNITTESTS_SRCS} $<TARGET_OBJECTS:sdbuscppobjects>)
 target_link_libraries(libsdbus-c++_unittests ${SYSTEMD_LIBRARIES} gmock gmock_main)
 
-add_executable(libsdbus-c++_integrationtests ${INTEGRATIONTESTS_SRCS})
-target_link_libraries(libsdbus-c++_integrationtests sdbus-c++ gmock gmock_main)
+add_executable(libsdbus-c++_integrationtests ${INTEGRATIONTESTS_SRCS} $<TARGET_OBJECTS:sdbuscppobjects>)
+target_link_libraries(libsdbus-c++_integrationtests ${SYSTEMD_LIBRARIES} gmock gmock_main)
 
 #----------------------------------
 # INSTALLATION
