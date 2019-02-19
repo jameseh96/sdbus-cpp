@@ -155,6 +155,27 @@ namespace sdbus {
         {}
     };
 
+    class FileHandle
+    {
+    public:
+        FileHandle() : fd(-1) {}
+        int get()
+        {
+            return fd;
+        }
+        void set(int newFD)
+        {
+            fd = newFD;
+        }
+        FileHandle& operator=(const int& newFD) {
+            set(newFD);
+            return *this;
+        }
+    private:
+        int fd;
+    };
+
+
 }
 
 #endif /* SDBUS_CXX_TYPES_H_ */

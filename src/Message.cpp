@@ -30,6 +30,7 @@
 #include "ScopeGuard.h"
 #include <systemd/sd-bus.h>
 #include <cassert>
+#include <fcntl.h>
 
 namespace sdbus {
 
@@ -362,6 +363,25 @@ Message& Message::operator>>(Signature &item)
 
     return *this;
 }
+
+Message& Message::operator>>(FileHandle& item)
+{
+    int fd;
+    auto r = sd_bus_message_read_basic((sd_bus_message*)msg_, SD_BUS_TYPE_UNIX_FD, &fd);
+    if (r == 0)
+        ok_ = false;
+
+    SDBUS_THROW_ERROR_IF(r < 0, "Failed to deserialize a file descriptor value", -r);
+
+    fd = fcntl(fd, F_DUPFD_CLOEXEC, 3);
+
+    SDBUS_THROW_ERROR_IF(fd < 0, "Failed to duplicate file descriptor", -errno);
+
+    item.set(fd);
+
+    return *this;
+}
+
 
 
 Message& Message::openContainer(const std::string& signature)

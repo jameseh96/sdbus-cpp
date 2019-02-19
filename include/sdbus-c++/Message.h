@@ -43,6 +43,7 @@ namespace sdbus {
     class Variant;
     class ObjectPath;
     class Signature;
+    class FileHandle;
     template <typename... _ValueTypes> class Struct;
 
     class Message;
@@ -108,6 +109,7 @@ namespace sdbus {
         Message& operator>>(Variant &item);
         Message& operator>>(ObjectPath &item);
         Message& operator>>(Signature &item);
+        Message& operator>>(FileHandle& item);
 
         Message& openContainer(const std::string& signature);
         Message& closeContainer();
