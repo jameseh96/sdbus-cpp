@@ -19,9 +19,9 @@ pkg_check_modules(SYSTEMD REQUIRED libsystemd>=236)
 # SOURCE FILES CONFIGURATION
 #-------------------------------
 
-set(SDBUSCPP_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+set(SDBUSCPP_SOURCE_DIR ${PROJECT_SOURCE_DIR}/src)
 set(SDBUSCPP_INCLUDE_SUBDIR sdbus-c++)
-set(SDBUSCPP_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include/${SDBUSCPP_INCLUDE_SUBDIR})
+set(SDBUSCPP_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include/${SDBUSCPP_INCLUDE_SUBDIR})
 
 set(SDBUSCPP_CPP_SRCS
     ${SDBUSCPP_SOURCE_DIR}/Connection.cpp
@@ -67,8 +67,8 @@ set(SDBUSCPP_SRCS ${SDBUSCPP_CPP_SRCS} ${SDBUSCPP_HDR_SRCS} ${SDBUSCPP_PUBLIC_HD
 #-------------------------------
 
 set(CMAKE_CXX_STANDARD 17)
-include_directories("${CMAKE_SOURCE_DIR}/include")
-include_directories("${CMAKE_SOURCE_DIR}/src")
+include_directories("${PROJECT_SOURCE_DIR}/include")
+include_directories("${PROJECT_SOURCE_DIR}/src")
 
 #----------------------------------
 # LIBRARY BUILD INFORMATION
@@ -111,7 +111,7 @@ option(ENABLE_TESTS "Build and install tests (default ON)" ON)
 
 if(ENABLE_TESTS)
     enable_testing()
-    add_subdirectory("${CMAKE_SOURCE_DIR}/test")
+    add_subdirectory("${PROJECT_SOURCE_DIR}/test")
 endif()
 
 #----------------------------------
@@ -121,7 +121,7 @@ endif()
 option(BUILD_CODE_GEN "Build and install interface stub code generator (default OFF)" OFF)
 
 if(BUILD_CODE_GEN)
-    add_subdirectory("${CMAKE_SOURCE_DIR}/stub-generator")
+    add_subdirectory("${PROJECT_SOURCE_DIR}/stub-generator")
 endif()
 
 #----------------------------------
@@ -137,10 +137,10 @@ endif()
 set(SDBUSCPP_CONFIG_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/sdbus-c++)
 
 configure_file(sdbus-c++-config.cmake.in sdbus-c++-config.cmake @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/sdbus-c++-config.cmake DESTINATION ${SDBUSCPP_CONFIG_INSTALL_DIR} COMPONENT dev)
+install(FILES ${PROJECT_BINARY_DIR}/sdbus-c++-config.cmake DESTINATION ${SDBUSCPP_CONFIG_INSTALL_DIR} COMPONENT dev)
 
 configure_file(sdbus-c++-config-version.cmake.in sdbus-c++-config-version.cmake @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/sdbus-c++-config-version.cmake DESTINATION ${SDBUSCPP_CONFIG_INSTALL_DIR} COMPONENT dev)
+install(FILES ${PROJECT_BINARY_DIR}/sdbus-c++-config-version.cmake DESTINATION ${SDBUSCPP_CONFIG_INSTALL_DIR} COMPONENT dev)
 
 configure_file(sdbus-c++.pc.in sdbus-c++.pc @ONLY)
-install(FILES ${CMAKE_BINARY_DIR}/sdbus-c++.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig COMPONENT dev)
+install(FILES ${PROJECT_BINARY_DIR}/sdbus-c++.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig COMPONENT dev)
